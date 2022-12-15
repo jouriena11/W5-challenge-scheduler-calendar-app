@@ -11,7 +11,7 @@ Besides, in real life, this is deemed convenient to a user, as there's no need t
 const timeDisplayEl = $('#time-display');
 
 function displayTime() {
-  var rightNow = dayjs().format('hh:mm:ss a');
+  let rightNow = dayjs().format('hh:mm:ss a');
   timeDisplayEl.text(rightNow);
 }
 displayTime();
@@ -43,7 +43,7 @@ function saveItem(event) { // event = button click
 
   // Checking if the scheduleItems array contains any saved data by using findIndex() array method.
   const foundIndex = scheduleItems.findIndex((item) => { 
-    return item.time === parentID.split('-')[1];
+    return item.time === parentID.split('-')[1]; // returns the index of the object of which the 'time' value is the same as the last numerical character of an element's ID
   })
 
   if(foundIndex === -1) { // If no data is found (i.e., findIndex() returns a value of -1), then add the new data to the array.
@@ -58,9 +58,9 @@ function saveItem(event) { // event = button click
       time: parentID.split('-')[1],
     }
   }
-  localStorage.setItem('storeItem', JSON.stringify(scheduleItems)); // Save the latest array data to localStorage
+  localStorage.setItem('schedulerCalendar', JSON.stringify(scheduleItems)); // Save the latest array data to localStorage
+  alert('Your data is successfully saved.') // Alert the user that the data is successfully saved to localStorage
 }
-
 // Render time block container
 
 function timeBlockRender() {  
@@ -91,7 +91,7 @@ function timeBlockRender() {
     This is again achieved by using findIndex() method and conditional statements. */
     
     const foundIndex = scheduleItems.findIndex((item) => {
-      return item.time == i
+      return item.time == i // find the index of the saved data of which the 'time' value is the same as i
     })
 
     let textAreaStr = "";
@@ -99,7 +99,7 @@ function timeBlockRender() {
       textAreaStr = "";
     }
     else {
-      textAreaStr = scheduleItems[foundIndex].value; // if saved data is found, then returns the saved data
+      textAreaStr = scheduleItems[foundIndex].value; // if saved data is found, then returns the 'value' value stored in that particular index
     }
 
     // Reference to Week 5 student activity #10, but this is written in JavaScript instead of jQuery
@@ -124,7 +124,7 @@ function addEventListenerSaveButton() {
 
 function init() {
   scheduleItems = [];
-  var schedulerCalendar = JSON.parse(localStorage.getItem('storeItem'));
+  var schedulerCalendar = JSON.parse(localStorage.getItem('schedulerCalendar'));
   if (schedulerCalendar !== null) {
       scheduleItems = schedulerCalendar;
   }
