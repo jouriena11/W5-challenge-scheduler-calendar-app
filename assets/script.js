@@ -58,8 +58,8 @@ function saveItem(event) { // event = button click
       time: parentID.split('-')[1],
     }
   }
+  alert('Your data is successfully saved.'); // Alert the user that the data is successfully saved to localStorage
   localStorage.setItem('schedulerCalendar', JSON.stringify(scheduleItems)); // Save the latest array data to localStorage
-  alert('Your data is successfully saved.') // Alert the user that the data is successfully saved to localStorage
 }
 // Render time block container
 
