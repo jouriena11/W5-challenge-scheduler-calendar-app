@@ -41,25 +41,30 @@ function saveItem(event) { // event = button click
     return;
   }
 
+  let tempLocalStorage = JSON.parse(localStorage.getItem('schedulerCalendar'));
+  if(tempLocalStorage === null) {
+    tempLocalStorage = [];
+  }
+
   // Checking if the scheduleItems array contains any saved data by using findIndex() array method.
-  const foundIndex = scheduleItems.findIndex((item) => { 
+  const foundIndex = tempLocalStorage.findIndex((item) => { 
     return item.time === parentID.split('-')[1]; // returns the index of the object of which the 'time' value is the same as the last numerical character of an element's ID
   })
 
   if(foundIndex === -1) { // If no data is found (i.e., findIndex() returns a value of -1), then add the new data to the array.
-    scheduleItems.push({
+    tempLocalStorage.push({
       value: textAreaEl.value.trim(), // use .trim() to remove any blank space before and after the input content
       time: parentID.split('-')[1], // use split() to split hour-i into "hour" and "i", then select i which has an index of 1
     })
   }
   else {
-    scheduleItems[foundIndex] = { // If saved data is found (i.e., findIndex() returns a value other than -1), then replace the data in that particular index with new data.
+    tempLocalStorage[foundIndex] = { // If saved data is found (i.e., findIndex() returns a value other than -1), then replace the data in that particular index with new data.
       value: textAreaEl.value.trim(),
       time: parentID.split('-')[1],
     }
   }
   alert('Your data is successfully saved.'); // Alert the user that the data is successfully saved to localStorage
-  localStorage.setItem('schedulerCalendar', JSON.stringify(scheduleItems)); // Save the latest array data to localStorage
+  localStorage.setItem('schedulerCalendar', JSON.stringify(tempLocalStorage)); // Save the latest array data to localStorage
 }
 // Render time block container
 
@@ -67,7 +72,6 @@ function timeBlockRender() {
   
   const timeBlockEl = document.getElementById('time-block-container');
   //const timeBlockEl = $('#time-block-container');
-  console.log(timeBlockEl);
 
   for(var i = 9; i <= 17; i++) { // Time block is only available from 9am to 5pm to resemble the mock-up.
     
