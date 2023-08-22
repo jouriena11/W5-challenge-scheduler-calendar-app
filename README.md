@@ -10,7 +10,7 @@ In week 5 challenge, we're assigned to fix HTML and JavaScript codes to make the
 - management of codes
 
 ## **URLs**
-- [Deployed Application URL](https://jouriena11.github.io/W5-challenge-scheduler-calendar-app/)
+- [Deployed Application URL](http://13.211.203.123:81/)
 - [GitHub Repository URL](https://github.com/jouriena11/W5-challenge-scheduler-calendar-app)
 
 ## **Expected Behavior**
